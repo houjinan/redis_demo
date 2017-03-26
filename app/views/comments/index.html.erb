@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Comments</h1>
+<%fetch_comments%>
+<table>
+  <thead>
+    <tr>
+      <th>Content</th>
+      <th>Parent</th>
+      <th>Root</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comments.each do |comment| %>
+      <tr>
+        <td><%= comment["content"] if comment["content"].present? %></td>
+        <td><%= comment["parent_id"] if comment["parent_id"].present? %></td>
+        <td><%= comment["root_id"] if comment["root_id"].present? %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Comment', new_comment_path %>

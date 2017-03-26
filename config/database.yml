@@ -1,0 +1,20 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  username: root
+  password:
+  #socket: /tmp/mysql.sock
+
+development: &development
+  <<: *default
+  database: redis_demo_development
+
+test: &test
+  <<: *default
+  database: redis_demo_test
+
+production: &production
+  <<: *default
+  port: 3306
+  database: redis_demo
