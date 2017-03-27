@@ -10,6 +10,7 @@ class ArticlesController < ApplicationController
   # GET /articles/1
   # GET /articles/1.json
   def show
+
   end
 
   # GET /articles/new
@@ -70,5 +71,14 @@ class ArticlesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
       params.require(:article).permit(:title, :content, :user_id)
+    end
+
+    def fetch_comments
+      comments =  $redis.get("article_#{@article.id}_comments")
+      if comments.nil?
+        comments = @article.comments
+        $redis.set("article_#{@article.id}_comments", comments)
+      end
+      @comments = JSON.load comments
     end
 end

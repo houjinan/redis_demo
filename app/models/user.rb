@@ -12,8 +12,10 @@ class User < ApplicationRecord
 
   has_many :frientships, class_name: "Frientship", foreign_key: "current_user_id"
 
+  #我所有的朋友
   has_many :frients, through: :frientships, source: :frient_user
 
+  #我所有朋友的文章
   has_many :frient_articles, through: :frients, source: :articles
 
 
